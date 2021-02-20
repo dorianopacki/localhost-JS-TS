@@ -1,18 +1,25 @@
-// export const aggregateArrayIntoChunks = <T>(array: T[]) => {
-//   const output = []
+enum NumberRange {
+  MAX_VALUE = 7,
+  MIN_VALUE = 4,
+}
 
-// };
+type ArrayType = (string | number)[];
 
-export const aggregateArrayIntoChunks = (array: unknown[]) => {
-  const output = [];
-  const copy = [...array];
+const randomNumber = (max: NumberRange, min: NumberRange): number =>
+  Math.floor(Math.random() * (max - min) + min);
 
-  const randomNumber = function () {
-    return Math.floor(Math.random() * (7 - 4) + 4);
-  };
+export const aggregateArrayIntoChunks = (array: ArrayType) => {
+  const output: (string | number)[][][] = [];
 
-  while (copy.length > 0) {
-    output.push([copy.splice(0, randomNumber())]);
+  const givenArray = [...array];
+
+  while (givenArray.length > 0) {
+    output.push([
+      givenArray.splice(
+        0,
+        randomNumber(NumberRange.MAX_VALUE, NumberRange.MIN_VALUE)
+      ),
+    ]);
   }
 
   return output;

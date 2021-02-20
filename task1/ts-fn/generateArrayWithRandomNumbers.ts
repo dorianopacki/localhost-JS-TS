@@ -19,7 +19,7 @@ export const generateArrayOfArrays = (
   min: number,
   max: number
 ) => {
-  const output = [];
+  const output: number[][] = [];
   for (let i = 0; i < howManyArrays; i++) {
     output.push(generateArrayWithRandomNumbers(howManyNumbers, min, max));
   }

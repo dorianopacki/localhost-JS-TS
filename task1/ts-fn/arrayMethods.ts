@@ -9,7 +9,7 @@ export const forEachFn = <T>(array: T[], callback: Function): void => {
 // map
 
 export const mapFn = <T>(array: T[], callback: Function) => {
-  const output = [];
+  const output: unknown[] = [];
   for (let i = 0; i < array.length; i++) {
     output.push(callback(array[i]));
   }
@@ -17,6 +17,16 @@ export const mapFn = <T>(array: T[], callback: Function) => {
 };
 
 // entries
+
+export const entriesFn = function* (array: any) {
+  if (!array.length) return "array is empty";
+  const arr = [];
+  for (let i = 0; i < array.length; i++) {
+    let elements = array[i];
+    arr.push(yield elements);
+  }
+  return arr;
+};
 
 // filter
 
@@ -40,7 +50,7 @@ export const reduceFn = <T, U>(array: T[], callback: Function, initial?: U) => {
 
 // every
 
-export const everyFn = <T>(array: T[], callback: Function) => {
+export const everyFn = <T>(array: T[], callback: Function): boolean => {
   for (let i = 0; i < array.length; i++) {
     if (!callback(array[i])) return false;
   }
@@ -49,42 +59,9 @@ export const everyFn = <T>(array: T[], callback: Function) => {
 
 // some
 
-export const someFn = <T>(array: T[], callback: Function) => {
+export const someFn = <T>(array: T[], callback: Function): boolean => {
   for (let i = 0; i < array.length; i++) {
     if (callback(array[i])) return true;
   }
   return false;
 };
-
-// *****************
-
-// import {
-//   forEachFn,
-//   mapFn,
-//   filterFn,
-//   everyFn,
-//   someFn,
-//   reduceFn,
-// } from "./task1/ts-fn/arrayMethods";
-
-// ********
-// const nums = [1, 2, 3, 4];
-// const chars = ["a", "b", "c", "d"];
-
-// const multiply = (x: number) => x * 2;
-// const multiply = (x: number) => x > 0;
-
-// ********
-
-// forEachFn(nums, multiply);
-
-// const a = mapFn(chars, multiply);
-
-// const a = filterFn(nums, (x: number) => x >= 2);
-
-// const a = everyFn(chars, (x: any) => typeof x === "number");
-
-// const a = someFn(nums, (x: any) => x === 3);
-
-// const a = reduceFn(nums, (acc: number, val: number) => acc + val, null);
-// console.log(a);
