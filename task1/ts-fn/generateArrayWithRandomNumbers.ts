@@ -3,6 +3,11 @@ export const generateArrayWithRandomNumbers = (
   min: number,
   max: number
 ) => {
+  if (howManyNumbers < 1)
+    throw Error("Amount of numbers can't be smaller than 1");
+  if (min < 1 || max < 1)
+    throw Error("Minimum and maxiumum value can't be smaller than 1");
+
   const output: number[] = [];
 
   const randomNumber = () => Math.floor(Math.random() * (max - min)) + min;
@@ -19,6 +24,13 @@ export const generateArrayOfArrays = (
   min: number,
   max: number
 ) => {
+  if (howManyArrays < 1)
+    throw Error("Amount of arrays can't be smaller than 1");
+  if (howManyNumbers < 1)
+    throw Error("Amount of numbers can't be smaller than 1");
+  if (min < 1 || max < 1)
+    throw Error("Minimum and maxiumum value can't be smaller than 1");
+
   const output: number[][] = [];
   for (let i = 0; i < howManyArrays; i++) {
     output.push(generateArrayWithRandomNumbers(howManyNumbers, min, max));
