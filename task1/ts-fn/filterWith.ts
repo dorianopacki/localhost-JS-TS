@@ -15,14 +15,35 @@ export function filterWith<T>(array: T[], phrase: string | number): T[] {
   const doesMatchPhrase = (data: string | number): boolean =>
     data.toString().toLowerCase() === phrase.toString().toLowerCase();
 
-  function iterateThrough<T>(data: T) {
-    if (isAnArray(data) || isAnObject(data)) {
-      for (let element in data) {
-        if (isAString(data[element])) {
+  function iterateThrough(data: any) {
+    for (let key in data) {
+      if (isAnArray(data[key]) || isAnObject(data[key])) {
+        iterateThrough(data[key]);
+      } else {
+        if (doesMatchPhrase(data[key])) {
+          console.log(`mam chuja ${data[key]}`);
         }
       }
     }
   }
 
+  const searchingPhrase = new RegExp(phrase.toString());
+  iterateThrough(array);
   return [];
 }
+
+// Working below somehow
+// function iterateThrough(data: any) {
+//   for (let key in data) {
+//     if (isAnArray(data[key]) || isAnObject(data[key])) {
+//       iterateThrough(data[key]);
+//     } else {
+//       if (
+//         data[key].toString().toLowerCase() ===
+//         phrase.toString().toLocaleLowerCase()
+//       ) {
+//         console.log(`mam chuja ${data[key]}`);
+//       }
+//     }
+//   }
+// }
