@@ -1,6 +1,6 @@
 export const isRectangularTriangle = (x1: number, x2: number, x3: number) => {
-  if (x1 === 0 || x2 === 0 || x3 === 0)
-    return "Side length can't be equal to 0";
+  if (x1 < 0 || x2 < 0 || x3 < 0)
+    return "Side length has to be a natural number";
 
   const sides = [x1, x2, x3].sort((a, b) => a - b);
 

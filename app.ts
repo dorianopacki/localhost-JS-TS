@@ -136,5 +136,5 @@ const data = [
     ],
   },
 ];
-const a = filterWith(data, "Bruce Barton");
-console.log(a);
+
+filterWith(data, "VELOS");

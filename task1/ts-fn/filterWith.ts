@@ -21,7 +21,7 @@ export function filterWith<T>(array: T[], phrase: string | number): T[] {
         iterateThrough(data[key]);
       } else {
         if (doesMatchPhrase(data[key])) {
-          console.log(`mam chuja ${data[key]}`);
+          console.log(`got it ${data[key]}`);
         }
       }
     }
@@ -31,19 +31,3 @@ export function filterWith<T>(array: T[], phrase: string | number): T[] {
   iterateThrough(array);
   return [];
 }
-
-// Working below somehow
-// function iterateThrough(data: any) {
-//   for (let key in data) {
-//     if (isAnArray(data[key]) || isAnObject(data[key])) {
-//       iterateThrough(data[key]);
-//     } else {
-//       if (
-//         data[key].toString().toLowerCase() ===
-//         phrase.toString().toLocaleLowerCase()
-//       ) {
-//         console.log(`mam chuja ${data[key]}`);
-//       }
-//     }
-//   }
-// }
