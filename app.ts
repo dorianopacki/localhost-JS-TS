@@ -1,5 +1,5 @@
 import task1 from "./task1";
-import { filterWith } from "./task1/ts-fn/filterWith";
+import { getMyAge } from "./task1/ts-fn/getMyAge";
 
 const data = [
   {
@@ -137,4 +137,5 @@ const data = [
   },
 ];
 
-filterWith(data, "VELOS");
+const a = getMyAge("s");
+console.log(a);

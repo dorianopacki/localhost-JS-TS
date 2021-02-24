@@ -27,7 +27,10 @@ export function filterWith<T>(array: T[], phrase: string | number): T[] {
     }
   }
 
-  const searchingPhrase = new RegExp(phrase.toString());
+  // const searchingPhrase = new RegExp(phrase.toString());
   iterateThrough(array);
   return [];
 }
+
+//TODO
+//switch matching method to match regexp, return data and fix types in iterateThrough fun

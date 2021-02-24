@@ -4,7 +4,7 @@ export const getMyAge = (date: string | number | Date) => {
   if (typeof date === "string" && isNaN(parseInt(date)))
     return "Given string can't be transform to number";
   if (formatDate(date) > currentYear || formatDate(date) < 1900)
-    return "Year / Date format is not valid";
+    return "Date format is not valid";
 
   function formatDate(date: string | number | Date) {
     if (typeof date === "string") {

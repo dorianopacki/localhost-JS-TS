@@ -18,7 +18,7 @@ export const mapFn = <T>(array: T[], callback: Function) => {
 
 // entries
 
-export const entriesFn = function* (array: any) {
+export const entriesFn = function* <T>(array: T[]) {
   if (!array.length) return "array is empty";
   const arr = [];
   for (let i = 0; i < array.length; i++) {

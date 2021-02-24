@@ -1,11 +1,9 @@
-enum NumberRange {
-  MAX_VALUE = 7,
-  MIN_VALUE = 4,
-}
+const MAX_VALUE = 7,
+  MIN_VALUE = 4;
 
 type ArrayType = (string | number)[];
 
-const randomNumber = (max: NumberRange, min: NumberRange): number =>
+const randomNumber = (max: number, min: number) =>
   Math.floor(Math.random() * (max - min) + min);
 
 export const aggregateArrayIntoChunks = (array: ArrayType) => {
@@ -14,12 +12,7 @@ export const aggregateArrayIntoChunks = (array: ArrayType) => {
   const givenArray = [...array];
 
   while (givenArray.length > 0) {
-    output.push([
-      givenArray.splice(
-        0,
-        randomNumber(NumberRange.MAX_VALUE, NumberRange.MIN_VALUE)
-      ),
-    ]);
+    output.push([givenArray.splice(0, randomNumber(MAX_VALUE, MIN_VALUE))]);
   }
 
   return output;
