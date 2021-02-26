@@ -3,10 +3,14 @@ export const generateArrayWithRandomNumbers = (
   min: number,
   max: number
 ) => {
+  // NaN ??? brak walidacji na NaN
   if (howManyNumbers < 1)
-    throw Error("Amount of numbers can't be smaller than 1");
+    throw Error("Amount of numbers can't be smaller than 1"); // musi być liczba całkowita
+
   if (min < 1 || max < 1)
     throw Error("Minimum and maxiumum value can't be smaller than 1");
+
+  // min > max -> error
 
   const output: number[] = [];
 

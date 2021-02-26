@@ -1,22 +1,24 @@
-export const getMyAge = (date: string | number | Date) => {
+type avaiableTypes = string | number | Date;
+
+export const getMyAge = (input: avaiableTypes) => {
   const currentYear = new Date().getFullYear();
 
   if (typeof date === "string" && isNaN(parseInt(date)))
     return "Given string can't be transform to number";
-  if (formatDate(date) > currentYear || formatDate(date) < 1900)
-    return "Date format is not valid";
 
-  function formatDate(date: string | number | Date) {
+  function formatDate(date: avaiableTypes) {
     if (typeof date === "string") {
-      return parseInt(date);
+      return parseInt(date); // nan
     } else if (typeof date === "number") {
-      return date;
-    } else if (Object.prototype.toString.call(date) === "[object Date]") {
-      return date.getFullYear();
-    } else {
-      throw new Error("Ups.. Something went wrong");
+      return date; // nan
+    } else if (date instanceof Date) {
+      return date.getFullYear(); // invalid Datae
     }
   }
+
+  const correctDate = formatDate(input);
+  if (correctDate > currentYear || correctDate < 1900)
+    return "Date format is not valid";
 
   function calculateAge() {
     const data = formatDate(date);

@@ -1,13 +1,15 @@
+// do poprawy
+
+// type anyTuple = [number, string];
+
 export const findPhraseInArray = (array: string[], phrase: string) => {
-  if (array.length < 1) return "Given array is empty!";
-  if (phrase.length < 1) return "You can't pass an empty string!";
-
-  const words = [...array].entries();
-  for (const word of words) {
-    if (word[1] === phrase) {
-      return word;
+  const copy = [...array];
+  const result = copy.reduce((acc, av, index) => {
+    if (av.toLocaleLowerCase() === phrase.toLocaleLowerCase()) {
+      acc.push([index, av]);
     }
-  }
-
-  return "There is no such a phrase in given array!";
+  }, [] as [number, string][]);
+  return result;
 };
+
+// result = [[id, elem],[ id, elment],[]]

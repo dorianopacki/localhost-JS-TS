@@ -1,5 +1,5 @@
 import task1 from "./task1";
-import { getMyAge } from "./task1/ts-fn/getMyAge";
+import { findPhraseInArray } from "./task1/ts-fn/findPhraseInArray";
 
 const data = [
   {
@@ -136,6 +136,28 @@ const data = [
     ],
   },
 ];
+// const arr = [1, 2, 3, 4];
+// const arrb = ["a", "b", "c"];
+// const alphabet = "abcdefghijklmnoprstuwxyz".split("");
 
-const a = getMyAge("s");
+const words = [
+  "well-off",
+  "gold",
+  "omniscient",
+  "accept",
+  "relation",
+  "calculate",
+  "high",
+  "treatment",
+  "boiling",
+  "grandmother",
+  "ambiguous",
+  "spotless",
+  "spy",
+  "moan",
+  "prickly",
+];
+
+const a = findPhraseInArray(words, "moan");
 console.log(a);
+// console.log(alphabet);
