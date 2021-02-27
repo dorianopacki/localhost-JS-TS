@@ -3,7 +3,7 @@ type avaiableTypes = string | number | Date;
 export const getMyAge = (input: avaiableTypes) => {
   const currentYear = new Date().getFullYear();
 
-  if (typeof date === "string" && isNaN(parseInt(date)))
+  if (typeof input === "string" && isNaN(parseInt(input)))
     return "Given string can't be transform to number";
 
   function formatDate(date: avaiableTypes) {
@@ -21,7 +21,7 @@ export const getMyAge = (input: avaiableTypes) => {
     return "Date format is not valid";
 
   function calculateAge() {
-    const data = formatDate(date);
+    const data = formatDate(input);
     return currentYear - data;
   }
 

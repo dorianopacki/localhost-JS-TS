@@ -9,14 +9,14 @@ export const isRectangularTriangle = (x1: number, x2: number, x3: number) => {
 
   //
 
-  function triangleBuilder([x1, x2, x3]: number[]) {
+  function rectangularTriangleBuilder([x1, x2, x3]: number[]) {
     return Math.pow(x1, 2) + Math.pow(x2, 2) === Math.pow(x3, 2)
       ? "It is possible to build rectangular triangle with those sides"
       : "It is not possible to build rectangular triangle with those sides";
   }
 
-  const canBuildTriangle = triangleBuilder([a, b, c]);
-  return canBuildTriangle;
+  const canBuildRectangularTriangle = rectangularTriangleBuilder([a, b, c]);
+  return canBuildRectangularTriangle;
 };
 
 // czy to są numery

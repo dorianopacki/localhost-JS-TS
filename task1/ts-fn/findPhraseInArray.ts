@@ -1,15 +1,23 @@
-// do poprawy
-
-// type anyTuple = [number, string];
+type arrayOfTuples = [number, string][];
 
 export const findPhraseInArray = (array: string[], phrase: string) => {
-  const copy = [...array];
-  const result = copy.reduce((acc, av, index) => {
-    if (av.toLocaleLowerCase() === phrase.toLocaleLowerCase()) {
-      acc.push([index, av]);
-    }
-  }, [] as [number, string][]);
-  return result;
-};
+  if (array.length < 1) return "Given array seems to be empty";
 
-// result = [[id, elem],[ id, elment],[]]
+  const copy = [...array];
+
+  const result = copy.reduce(
+    (acc: arrayOfTuples, val: string, index: number) => {
+      if (val.toLocaleLowerCase().includes(phrase.toLocaleLowerCase())) {
+        acc.push([index, val]);
+      }
+      return acc;
+    },
+    []
+  );
+
+  if (result.length < 1) {
+    return "Couldn't find this phrase in given array";
+  } else {
+    return result;
+  }
+};

@@ -9,7 +9,7 @@ export const aggregateArrayIntoChunks = <T>(array: Array<T>) => {
 
   function setChunksLength() {
     const givenArray = [...array];
-    const result = [];
+    const result: T[][] = [];
 
     while (givenArray.length > 0) {
       result.push(givenArray.splice(0, randomNumber(MAX_VALUE, MIN_VALUE)));

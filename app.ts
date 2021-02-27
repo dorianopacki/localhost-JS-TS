@@ -1,5 +1,8 @@
 import task1 from "./task1";
-import { findPhraseInArray } from "./task1/ts-fn/findPhraseInArray";
+import {
+  generateArrayWithRandomNumbers,
+  generateArrayOfArrays,
+} from "./task1/ts-fn/generateArrayWithRandomNumbers";
 
 const data = [
   {
@@ -145,6 +148,7 @@ const words = [
   "gold",
   "omniscient",
   "accept",
+  "drain",
   "relation",
   "calculate",
   "high",
@@ -156,8 +160,9 @@ const words = [
   "spy",
   "moan",
   "prickly",
+  "drain",
 ];
 
-const a = findPhraseInArray(words, "moan");
+const a = generateArrayOfArrays(2, 9, 1, 9);
 console.log(a);
 // console.log(alphabet);
