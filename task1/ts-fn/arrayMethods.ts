@@ -64,7 +64,6 @@ export const filterFn = <T extends number | string>(
 };
 
 // reduce
-// sprawdzić typy bo generyki to zło
 type callbackReduceFn = <T, U>(
   previousValue: T,
   currentValue: U,
