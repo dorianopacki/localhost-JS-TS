@@ -37,17 +37,29 @@ export const mapFn = <T>(
 
 //every
 
-type everyFnCallback = <T>(
-  currentValue: T,
-  index: number,
-  array: T[]
-) => boolean;
+export const everyFn = <T>(
+  array: T[],
+  callback: (currentValue: T, index: number, array: T[]) => boolean
+) => {
+  const copy = [...array];
 
-export const everyFn = <T>(array: T[], callback: everyFnCallback) => {
+  return copy.reduce(
+    (accumulator, currentValue, index, copy) =>
+      accumulator && callback(currentValue, index, copy),
+    true
+  );
+};
+
+//some
+
+export const someFn = <T>(
+  array: T[],
+  callback: (currentValue: T, index: number, array: T[]) => boolean
+) => {
   const copy = [...array];
 
   return copy.reduce((accumulator, currentValue, index, copy) => {
-    accumulator.push(callback(currentValue, index, copy));
+    if (callback(currentValue, index, copy)) return true;
     return accumulator;
-  }, [] as boolean[]);
+  }, false);
 };

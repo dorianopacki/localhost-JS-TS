@@ -1,5 +1,5 @@
 import task1 from "./task1";
-import { everyFn } from "./task1/ts-fn/masterReduce";
+import { someFn } from "./task1/ts-fn/masterReduce";
 
 const data = [
   {
@@ -136,8 +136,8 @@ const data = [
     ],
   },
 ];
-const arr = [1, 2, 3, 4];
-// const arrb = ["a", "b", "c"];
+// const arr = [1, 2, 3, 4];
+const arrb = ["a", "b", "c"];
 // const alphabet = "abcdefghijklmnoprstuwxyz".split("");
 
 const words = [
@@ -160,6 +160,6 @@ const words = [
   "drain",
 ];
 
-const a = everyFn(arr, (element) => element >= 1);
+const a = someFn(arrb, (element) => element === "a");
 console.log(a);
 // console.log(alphabet);
