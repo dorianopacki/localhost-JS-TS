@@ -1,5 +1,5 @@
 import task1 from "./task1";
-import { someFn } from "./task1/ts-fn/masterReduce";
+import { generateHuman } from "./task1/ts-fn/generateHuman";
 
 const data = [
   {
@@ -160,6 +160,8 @@ const words = [
   "drain",
 ];
 
-const a = someFn(arrb, (element) => element === "a");
+const settings = { actualPageIdx: 1, entriesOnPage: 5 };
+
+const a = generateHuman();
 console.log(a);
 // console.log(alphabet);
