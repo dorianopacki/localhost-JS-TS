@@ -1,5 +1,5 @@
 import task1 from "./task1";
-import { generateHuman } from "./task1/ts-fn/generateHuman";
+import { getMyAge } from "./task1/ts-fn/getMyAge";
 
 const data = [
   {
@@ -160,8 +160,8 @@ const words = [
   "drain",
 ];
 
-const settings = { actualPageIdx: 1, entriesOnPage: 5 };
+// const settings = { actualPageIdx: 1, entriesOnPage: 5 };
 
-const a = generateHuman();
+const a = getMyAge(new Date(12.45));
 console.log(a);
 // console.log(alphabet);

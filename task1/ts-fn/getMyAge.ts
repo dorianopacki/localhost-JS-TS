@@ -1,24 +1,46 @@
 type avaiableTypes = string | number | Date;
 
+const isValidNumber = (number: number) =>
+  !isNaN(number) && Number.isInteger(number);
+
 export const getMyAge = (input: avaiableTypes) => {
   const currentYear = new Date().getFullYear();
 
-  if (typeof input === "string" && isNaN(parseInt(input)))
-    return "Given string can't be transform to number";
+  if (typeof input === "string") {
+    if (!isValidNumber(parseInt(input)))
+      return "Given string can't be transform to number";
+  }
 
-  function formatDate(date: avaiableTypes) {
-    if (typeof date === "string") {
-      return parseInt(date); // nan
-    } else if (typeof date === "number") {
-      return date; // nan
+  if (typeof input === "number") {
+    if (!isValidNumber(input)) return "Given number is not valid";
+  }
+
+  if (input instanceof Date) {
+    if (!isValidNumber(input.getTime())) return "Given date is not valid";
+  }
+
+  function formatDate(date: string | number | Date) {
+    if (typeof date === "number") {
+      if (isValidNumber(date)) {
+        return date;
+      }
+    } else if (typeof date === "string") {
+      if (isValidNumber(parseInt(date))) {
+        return parseInt(date);
+      }
     } else if (date instanceof Date) {
-      return date.getFullYear(); // invalid Datae
+      if (isValidNumber(date.getFullYear())) {
+        return date.getFullYear();
+      }
     }
+    //weird shit
+    return process.exit(1);
   }
 
   const correctDate = formatDate(input);
+
   if (correctDate > currentYear || correctDate < 1900)
-    return "Date format is not valid";
+    return "Pass the date between 1990 and current year";
 
   function calculateAge() {
     const data = formatDate(input);

@@ -1,9 +1,258 @@
-import axios from "axios";
+import { Person } from "./human";
+import { v4 as uuidv4 } from "uuid";
+import fetch from "node-fetch";
+import { DataType } from "../types/DataType";
 
-const getUser = () => {
-  axios
-    .get("https://random-data-api.com/api/users/random_user")
-    .then((response) => {
-      console.log(response);
-    });
+const COUNTRIES = [
+  "Afghanistan",
+  "Albania",
+  "Algeria",
+  "Andorra",
+  "Angola",
+  "Anguilla",
+  "Antigua &amp; Barbuda",
+  "Argentina",
+  "Armenia",
+  "Aruba",
+  "Australia",
+  "Austria",
+  "Azerbaijan",
+  "Bahamas",
+  "Bahrain",
+  "Bangladesh",
+  "Barbados",
+  "Belarus",
+  "Belgium",
+  "Belize",
+  "Benin",
+  "Bermuda",
+  "Bhutan",
+  "Bolivia",
+  "Bosnia &amp; Herzegovina",
+  "Botswana",
+  "Brazil",
+  "British Virgin Islands",
+  "Brunei",
+  "Bulgaria",
+  "Burkina Faso",
+  "Burundi",
+  "Cambodia",
+  "Cameroon",
+  "Cape Verde",
+  "Cayman Islands",
+  "Chad",
+  "Chile",
+  "China",
+  "Colombia",
+  "Congo",
+  "Cook Islands",
+  "Costa Rica",
+  "Cote D Ivoire",
+  "Croatia",
+  "Cruise Ship",
+  "Cuba",
+  "Cyprus",
+  "Czech Republic",
+  "Denmark",
+  "Djibouti",
+  "Dominica",
+  "Dominican Republic",
+  "Ecuador",
+  "Egypt",
+  "El Salvador",
+  "Equatorial Guinea",
+  "Estonia",
+  "Ethiopia",
+  "Falkland Islands",
+  "Faroe Islands",
+  "Fiji",
+  "Finland",
+  "France",
+  "French Polynesia",
+  "French West Indies",
+  "Gabon",
+  "Gambia",
+  "Georgia",
+  "Germany",
+  "Ghana",
+  "Gibraltar",
+  "Greece",
+  "Greenland",
+  "Grenada",
+  "Guam",
+  "Guatemala",
+  "Guernsey",
+  "Guinea",
+  "Guinea Bissau",
+  "Guyana",
+  "Haiti",
+  "Honduras",
+  "Hong Kong",
+  "Hungary",
+  "Iceland",
+  "India",
+  "Indonesia",
+  "Iran",
+  "Iraq",
+  "Ireland",
+  "Isle of Man",
+  "Israel",
+  "Italy",
+  "Jamaica",
+  "Japan",
+  "Jersey",
+  "Jordan",
+  "Kazakhstan",
+  "Kenya",
+  "Kuwait",
+  "Kyrgyz Republic",
+  "Laos",
+  "Latvia",
+  "Lebanon",
+  "Lesotho",
+  "Liberia",
+  "Libya",
+  "Liechtenstein",
+  "Lithuania",
+  "Luxembourg",
+  "Macau",
+  "Macedonia",
+  "Madagascar",
+  "Malawi",
+  "Malaysia",
+  "Maldives",
+  "Mali",
+  "Malta",
+  "Mauritania",
+  "Mauritius",
+  "Mexico",
+  "Moldova",
+  "Monaco",
+  "Mongolia",
+  "Montenegro",
+  "Montserrat",
+  "Morocco",
+  "Mozambique",
+  "Namibia",
+  "Nepal",
+  "Netherlands",
+  "Netherlands Antilles",
+  "New Caledonia",
+  "New Zealand",
+  "Nicaragua",
+  "Niger",
+  "Nigeria",
+  "Norway",
+  "Oman",
+  "Pakistan",
+  "Palestine",
+  "Panama",
+  "Papua New Guinea",
+  "Paraguay",
+  "Peru",
+  "Philippines",
+  "Poland",
+  "Portugal",
+  "Puerto Rico",
+  "Qatar",
+  "Reunion",
+  "Romania",
+  "Russia",
+  "Rwanda",
+  "Saint Pierre &amp; Miquelon",
+  "Samoa",
+  "San Marino",
+  "Satellite",
+  "Saudi Arabia",
+  "Senegal",
+  "Serbia",
+  "Seychelles",
+  "Sierra Leone",
+  "Singapore",
+  "Slovakia",
+  "Slovenia",
+  "South Africa",
+  "South Korea",
+  "Spain",
+  "Sri Lanka",
+  "St Kitts &amp; Nevis",
+  "St Lucia",
+  "St Vincent",
+  "St. Lucia",
+  "Sudan",
+  "Suriname",
+  "Swaziland",
+  "Sweden",
+  "Switzerland",
+  "Syria",
+  "Taiwan",
+  "Tajikistan",
+  "Tanzania",
+  "Thailand",
+  "Timor L'Este",
+  "Togo",
+  "Tonga",
+  "Trinidad &amp; Tobago",
+  "Tunisia",
+  "Turkey",
+  "Turkmenistan",
+  "Turks &amp; Caicos",
+  "Uganda",
+  "Ukraine",
+  "United Arab Emirates",
+  "United Kingdom",
+  "Uruguay",
+  "Uzbekistan",
+  "Venezuela",
+  "Vietnam",
+  "Virgin Islands (US)",
+  "Yemen",
+  "Zambia",
+  "Zimbabwe",
+];
+const MIN_AGE = 18;
+const MAX_AGE = 85;
+
+const randomNumber = (min: number, max: number) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
+const createEmailAdress = (name: string, surname: string) =>
+  `${name.toLowerCase()}.${surname.toLowerCase()}@example.com`;
+
+const createPhoneNumber = () => {
+  let phoneNumber = "";
+  for (let i = 0; i < 9; i++) {
+    phoneNumber = phoneNumber + randomNumber(0, 9);
+  }
+  return phoneNumber;
 };
+
+const getNationality = () => {
+  const index = Math.floor(Math.random() * COUNTRIES.length - 1);
+  return COUNTRIES[index];
+};
+
+async function humanConstructor(data: DataType) {
+  const name = data.name.first;
+  const surname = data.name.last;
+  const gender = data.gender;
+  const age = randomNumber(MIN_AGE, MAX_AGE);
+  const phoneNumber = createPhoneNumber();
+  const email = createEmailAdress(name, surname);
+  const country = getNationality();
+  const id = uuidv4();
+
+  console.log(
+    new Person(name, surname, gender, age, phoneNumber, email, country, id)
+  );
+}
+
+export async function getUser() {
+  try {
+    const result = await fetch("https://randomuser.me/api/?inc=name,%20gender");
+    const data = await result.json();
+    await humanConstructor(data.results[0]);
+  } catch (err) {
+    console.error(err);
+  }
+}

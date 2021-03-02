@@ -5,6 +5,7 @@ type Settings = {
 
 const isValidNumber = (number: number) =>
   Number.isInteger(number) && !isNaN(number);
+
 const checkIt = (...args: number[]) =>
   args.every((argument) => isValidNumber(argument));
 
@@ -32,7 +33,7 @@ export const pagination = (dataEntries: number, settings: Settings) => {
   )
     return "Argument's are not valid";
 
-  const output = [];
+  const output: string[] = [];
 
   if (currentPage < paginationRange + 1) {
     startingPage = 1;
