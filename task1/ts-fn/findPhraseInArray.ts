@@ -16,7 +16,7 @@ export const findPhraseInArray = (array: string[], phrase: string) => {
   );
 
   if (result.length < 1) {
-    return "Couldn't find this phrase in given array";
+    return "Couldn't find any mathching phrase in given array";
   } else {
     return result;
   }

@@ -16,7 +16,11 @@ const randomNumber = (max: number, min: number) =>
 
 const isValidNumber = (...args: number[]) =>
   args.every(
-    (argument) => Number.isInteger(argument) && !isNaN(argument) && argument > 0
+    (argument) =>
+      Number.isInteger(argument) &&
+      !isNaN(argument) &&
+      Number.isFinite(argument) &&
+      argument > 0
   );
 
 export const generateArrayWithRandomNumbers: generateArrayWithRandomNumbersProps = (

@@ -1,3 +1,4 @@
+import { E2BIG } from "constants";
 import task1 from "./task1";
 import { filterWith } from "./task1/ts-fn/filterWith";
 
@@ -136,7 +137,7 @@ const data = [
     ],
   },
 ];
-// const arr = [1, 2, 3, 4];
+// const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 const arrb = ["a", "b", "c"];
 // const alphabet = "abcdefghijklmnoprstuwxyz".split("");
 
@@ -160,8 +161,8 @@ const words = [
   "drain",
 ];
 
-// const settings = { actualPageIdx: 1, entriesOnPage: 5 };
+// const settings = { actualPageIdx: 10, entriesOnPage: 5 };
 
-const a = filterWith(data, "clock");
+const a = filterWith(data, "KENGEN");
 console.log(a);
 // console.log(alphabet);

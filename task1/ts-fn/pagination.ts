@@ -4,9 +4,9 @@ type Settings = {
 };
 
 const isValidNumber = (number: number) =>
-  Number.isInteger(number) && !isNaN(number);
+  Number.isInteger(number) && !isNaN(number) && Number.isFinite(number);
 
-const checkIt = (...args: number[]) =>
+const areArgumentsValid = (...args: number[]) =>
   args.every((argument) => isValidNumber(argument));
 
 export const pagination = (dataEntries: number, settings: Settings) => {
@@ -21,7 +21,7 @@ export const pagination = (dataEntries: number, settings: Settings) => {
   startingPage = 1;
 
   if (
-    !checkIt(
+    !areArgumentsValid(
       amountOfPages,
       paginationRange,
       currentPage,
