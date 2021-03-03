@@ -1,5 +1,5 @@
 import task1 from "./task1";
-import { getMyAge } from "./task1/ts-fn/getMyAge";
+import { filterWith } from "./task1/ts-fn/filterWith";
 
 const data = [
   {
@@ -162,6 +162,6 @@ const words = [
 
 // const settings = { actualPageIdx: 1, entriesOnPage: 5 };
 
-const a = getMyAge(new Date(12.45));
+const a = filterWith(data, "clock");
 console.log(a);
 // console.log(alphabet);

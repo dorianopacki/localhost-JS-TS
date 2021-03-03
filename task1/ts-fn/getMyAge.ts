@@ -1,7 +1,7 @@
 type avaiableTypes = string | number | Date;
 
 const isValidNumber = (number: number) =>
-  !isNaN(number) && Number.isInteger(number);
+  !isNaN(number) && Number.isInteger(number) && Number.isFinite(number);
 
 export const getMyAge = (input: avaiableTypes) => {
   const currentYear = new Date().getFullYear();
@@ -33,7 +33,7 @@ export const getMyAge = (input: avaiableTypes) => {
         return date.getFullYear();
       }
     }
-    //weird shit
+    //keeps returning type of unknown
     return process.exit(1);
   }
 

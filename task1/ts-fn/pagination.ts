@@ -15,7 +15,6 @@ export const pagination = (dataEntries: number, settings: Settings) => {
     currentPage: number,
     startingPage: number;
 
-  //best practicies, ale nieczytelne w hooy
   amountOfPages = dataEntries;
   paginationRange = settings.entriesOnPage;
   currentPage = settings.actualPageIdx;
