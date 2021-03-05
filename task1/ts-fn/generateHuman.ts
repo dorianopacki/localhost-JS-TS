@@ -45,7 +45,7 @@ export async function getUser() {
   try {
     const result = await fetch("https://randomuser.me/api/?inc=name,%20gender");
     const data = await result.json();
-    await humanConstructor(data.results[0]);
+    humanConstructor(data.results[0]);
   } catch (err) {
     console.error(err);
   }

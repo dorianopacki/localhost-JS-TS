@@ -4,24 +4,31 @@ const MAX_VALUE = 7,
 const randomNumber = (max: number, min: number) =>
   Math.floor(Math.random() * (max - min) + min);
 
-export const aggregateArrayIntoChunks = <T>(array: Array<T>) => {
-  const output: Array<Array<T>> = [];
+const getLastElem = <T>(arr: Array<chunk<T>>) => {
+  return arr[arr.length - 1];
+};
 
-  function setChunksLength() {
-    const givenArray = [...array];
-    const result: T[][] = [];
+type chunk<T> = T[];
 
-    while (givenArray.length > 0) {
-      result.push(givenArray.splice(0, randomNumber(MAX_VALUE, MIN_VALUE)));
-    }
+export const aggregateArrayIntoChunks = <T>(
+  array: Array<T>
+): Array<chunk<T>> => {
+  const output: Array<chunk<T>> = [];
 
-    if (result.some((el) => el.length < MIN_VALUE)) {
-      setChunksLength();
-    } else {
-      output.push(...result);
-    }
+  const givenArray = [...array];
+  const result: Array<chunk<T>> = [];
+
+  while (givenArray.length > 0) {
+    result.push(givenArray.splice(0, randomNumber(MAX_VALUE, MIN_VALUE)));
   }
 
-  setChunksLength();
-  return output;
+  const lastElem = getLastElem(result);
+  const isLastElemLessThenMin = lastElem.length < MIN_VALUE;
+
+  if (isLastElemLessThenMin) {
+    return aggregateArrayIntoChunks(array);
+  } else {
+    output.push(...result);
+    return output;
+  }
 };

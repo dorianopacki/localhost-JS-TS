@@ -1,4 +1,5 @@
 const canBuildATriangle = ([a, b, c]: number[]) => c < a + b;
+
 const isValidNumber = (number: number) =>
   !isNaN(number) && Number.isInteger(number) && Number.isFinite(number);
 

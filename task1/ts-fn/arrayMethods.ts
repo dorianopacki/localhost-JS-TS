@@ -1,10 +1,6 @@
 // forEach
 
-type callbackForEach<T> = (
-  element: T,
-  index?: number,
-  array?: Array<T>
-) => void;
+type callbackForEach<T> = (element: T, index: number, array: Array<T>) => void;
 
 export const forEachFn = <T>(
   array: T[],
@@ -19,14 +15,14 @@ export const forEachFn = <T>(
 
 // map
 
-type callbackMap<T, U> = (element: T, index?: number, array?: T[]) => U;
+type callbackMap<T, U> = (element: T, index: number, array: T[]) => U;
 
-export const mapFn = <T, U>(array: T[], callback: callbackMap<T, U>) => {
+export const mapFn = <T, U>(array: T[], callback: callbackMap<T, U>): U[] => {
   // immutability
   const copy = [...array];
   const output: U[] = [];
   for (let i = 0; i < copy.length; i++) {
-    output.push(callback(copy[i]));
+    output.push(callback(copy[i], i, copy));
   }
   return output;
 };
@@ -45,20 +41,16 @@ export const entriesFn = function* <T>(array: T[]) {
 
 // filter
 
-type callbackFilterFn = <T extends number | string>(
-  element: T,
-  index?: number,
-  array?: T[]
-) => boolean;
+type callbackFilterFn = <T>(element: T, index: number, array: T[]) => boolean;
 
-export const filterFn = <T extends number | string>(
-  array: T[],
-  callback: callbackFilterFn
-) => {
+export const filterFn = <T>(array: T[], callback: callbackFilterFn) => {
   const output = [];
   const copy = [...array];
   for (let i = 0; i < copy.length; i++) {
-    callback(copy[i]) ? output.push(copy[i]) : null;
+    if (!callback(copy[i], i, copy)) {
+      continue;
+    }
+    output.push(copy[i]);
   }
   return output;
 };
@@ -67,28 +59,28 @@ export const filterFn = <T extends number | string>(
 type callbackReduceFn = <T, U>(
   previousValue: T,
   currentValue: U,
-  index?: number,
-  array?: T[]
+  index: number,
+  array: T[]
 ) => T | U;
 
 export const reduceFn = <T, U>(
   array: T[],
   callback: callbackReduceFn,
-  initial?: U
+  initial: U
 ) => {
   let accumulator = initial ? initial : array[0];
   for (let i = 0; i < array.length; i++) {
-    accumulator = callback(accumulator, array[i]);
+    accumulator = callback(accumulator, array[i], i, array);
   }
   return accumulator;
 };
 
 // every
 
-type callbackEveryFn = <T extends number | string>(
+type callbackEveryFn = <T>(
   currentValue: T,
-  index?: number,
-  array?: T[]
+  index: number,
+  array: T[]
 ) => boolean;
 
 export const everyFn = <T extends string | number>(
@@ -96,7 +88,7 @@ export const everyFn = <T extends string | number>(
   callback: callbackEveryFn
 ) => {
   for (let i = 0; i < array.length; i++) {
-    if (!callback(array[i])) return false;
+    if (!callback(array[i], i, array)) return false;
   }
   return true;
 };
@@ -105,8 +97,8 @@ export const everyFn = <T extends string | number>(
 
 type callbackSomeFn = <T extends number | string>(
   element: T,
-  index?: number,
-  array?: T[]
+  index: number,
+  array: T[]
 ) => boolean;
 
 export const someFn = <T extends number | string>(
@@ -114,7 +106,7 @@ export const someFn = <T extends number | string>(
   callback: callbackSomeFn
 ): boolean => {
   for (let i = 0; i < array.length; i++) {
-    if (callback(array[i])) return true;
+    if (callback(array[i], i, array)) return true;
   }
   return false;
 };

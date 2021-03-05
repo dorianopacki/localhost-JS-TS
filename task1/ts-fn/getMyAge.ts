@@ -21,19 +21,12 @@ export const getMyAge = (input: avaiableTypes) => {
 
   function formatDate(date: string | number | Date) {
     if (typeof date === "number") {
-      if (isValidNumber(date)) {
-        return date;
-      }
+      return date;
     } else if (typeof date === "string") {
-      if (isValidNumber(parseInt(date))) {
-        return parseInt(date);
-      }
+      return parseInt(date);
     } else if (date instanceof Date) {
-      if (isValidNumber(date.getFullYear())) {
-        return date.getFullYear();
-      }
+      return date.getFullYear();
     }
-    //keeps returning type of unknown
     return process.exit(1);
   }
 

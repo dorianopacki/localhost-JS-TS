@@ -1,39 +1,35 @@
-//utils
-// const isAnArray = <T>(data: T): boolean => Array.isArray(data);
-// const isAnObject = <T>(data: T): boolean =>
-//   Object.prototype.toString.call(data) === "[object Object]";
-// const isAString = <T>(data: T): boolean => typeof data === "string";
-// const isNumber = <T>(data: T): boolean => typeof data === "number";
-// const doesMatchPhrase = (data: string | number, phrase: RegExp) =>
-//   !!data.toString().toLowerCase().match(phrase);
+type avaiblePhase = string | number;
 
-export function filterWith<T, U>(array: U, phrase: T): T[] {
-  if (!Array.isArray(array)) {
-    throw new Error("Aray is not valid");
-  }
-  if (
-    typeof phrase !== "string" ||
-    (typeof phrase !== "number" && phrase.length < 2)
-  ) {
-    return [];
-  }
-  const result = array.filter((element: T) => {
-    for (const value of Object.values(element)) {
-      if (typeof value === "string" && value === phrase) {
-        return element;
-      } else if (typeof value === "number" && value.toString() === phrase) {
-        return element;
-      } else if (typeof value === "object") {
-        if (value.some((valueInArray: T) => valueInArray === phrase)) {
-          return element;
-        } else {
-          const secondResult: T[] = filterWith(value, phrase);
-          if (secondResult.some((valueInObject: T) => valueInObject)) {
-            return element;
-          }
-        }
-      }
+export function filterWith<T>(arrOfSomething: T[], phrase: avaiblePhase): T[] {
+  if (typeof phrase === "number") {
+    if (phrase.toString().length < 2) {
+      return [];
     }
+  } else {
+    if (phrase.length < 2) {
+      return [];
+    }
+  }
+  const toSearch = new RegExp(phrase.toString().toLowerCase());
+
+  return arrOfSomething.filter((element) => {
+    if (typeof element === "string") {
+      return element.toLowerCase().match(toSearch);
+    }
+
+    if (typeof element === "number") {
+      return element.toString().match(toSearch);
+    }
+
+    if (Array.isArray(element)) {
+      return filterWith(element, phrase).length > 0;
+    }
+
+    if (Object.prototype.toString.call(element) === "[object Object]") {
+      const arrayOfValues = Object.values(element);
+      return filterWith(arrayOfValues, phrase).length > 0;
+    }
+
+    return false;
   });
-  return result;
 }

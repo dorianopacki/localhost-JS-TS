@@ -1,6 +1,5 @@
-import { E2BIG } from "constants";
 import task1 from "./task1";
-import { filterWith } from "./task1/ts-fn/filterWith";
+import { paginateArray } from "./task1/ts-fn/pagination";
 
 const data = [
   {
@@ -137,8 +136,29 @@ const data = [
     ],
   },
 ];
-// const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-const arrb = ["a", "b", "c"];
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+const array: number[] = [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+];
 // const alphabet = "abcdefghijklmnoprstuwxyz".split("");
 
 const words = [
@@ -160,9 +180,12 @@ const words = [
   "prickly",
   "drain",
 ];
+const dataPagination = "Lorem Ipsum has been the industrys standard dummy text ever since the There are many variations of passages of Lorem Ipsum available All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary It uses a dictionary of over 200 Latin words".split(
+  " "
+);
+// const settings = { actualPageIdx: 1, entriesOnPage: 10 };
+const settings = { entriesOnPage: 5, paginateArrayIdx: 6 };
 
-// const settings = { actualPageIdx: 10, entriesOnPage: 5 };
-
-const a = filterWith(data, "KENGEN");
+const a = paginateArray(array, { actualPageIndex: 3, entriesOnPage: 5 });
 console.log(a);
 // console.log(alphabet);

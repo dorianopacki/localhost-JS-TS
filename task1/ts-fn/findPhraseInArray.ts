@@ -1,7 +1,10 @@
-type arrayOfTuples = [number, string][];
+type arrayOfTuples = Array<[number, string]>;
 
-export const findPhraseInArray = (array: string[], phrase: string) => {
-  if (array.length < 1) return "Given array seems to be empty";
+export const findPhraseInArray = (
+  array: string[],
+  phrase: string
+): Array<[number, string]> => {
+  if (array.length < 1) alert("Given array seems to be empty");
 
   const copy = [...array];
 
@@ -16,7 +19,7 @@ export const findPhraseInArray = (array: string[], phrase: string) => {
   );
 
   if (result.length < 1) {
-    return "Couldn't find any mathching phrase in given array";
+    return [];
   } else {
     return result;
   }

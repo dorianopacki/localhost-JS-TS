@@ -1,54 +1,31 @@
-type Settings = {
-  actualPageIdx: number;
+type settingsProps = {
+  actualPageIndex: number;
   entriesOnPage: number;
 };
 
-const isValidNumber = (number: number) =>
-  Number.isInteger(number) && !isNaN(number) && Number.isFinite(number);
-
-const areArgumentsValid = (...args: number[]) =>
-  args.every((argument) => isValidNumber(argument));
-
-export const pagination = (dataEntries: number, settings: Settings) => {
-  let amountOfPages: number,
-    paginationRange: number,
-    currentPage: number,
-    startingPage: number;
-
-  amountOfPages = dataEntries;
-  paginationRange = settings.entriesOnPage;
-  currentPage = settings.actualPageIdx;
-  startingPage = 1;
-
-  if (
-    !areArgumentsValid(
-      amountOfPages,
-      paginationRange,
-      currentPage,
-      startingPage,
-      settings.actualPageIdx,
-      settings.entriesOnPage
-    )
-  )
-    return "Argument's are not valid";
-
-  const output: string[] = [];
-
-  if (currentPage < paginationRange + 1) {
-    startingPage = 1;
-  } else if (currentPage >= amountOfPages - paginationRange / 2) {
-    startingPage = Math.floor(amountOfPages - paginationRange + 1);
-  } else {
-    startingPage = currentPage - Math.floor(paginationRange / 2);
+function areValuesValid(object: settingsProps) {
+  const value = Object.values(object);
+  for (let val in value) {
+    const number = parseInt(val);
+    if (!isNaN(number) && Number.isFinite(number) && Number.isInteger(number))
+      return true;
   }
+}
 
-  for (let i = startingPage; i <= startingPage + paginationRange - 1; i++) {
-    if (i === currentPage) {
-      output.push(`[${i}]`);
-    } else {
-      output.push(i.toString());
-    }
-  }
+export const paginateArray = <T>(dataEntries: T[], settings: settingsProps) => {
+  if (dataEntries.length < 1) return "Given array is empty";
+  if (!areValuesValid(settings)) return "Settings values are not valid";
 
-  return output;
+  const { entriesOnPage, actualPageIndex } = settings;
+
+  if (dataEntries.length / entriesOnPage <= actualPageIndex)
+    return "Number of pages is smaller than given page index";
+
+  const index = entriesOnPage * (actualPageIndex - 1);
+  const entriesOnSelectedPage: T[] = dataEntries.slice(
+    index,
+    index + entriesOnPage
+  );
+
+  return entriesOnSelectedPage;
 };

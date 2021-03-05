@@ -23,43 +23,56 @@ export const filterFn = <T extends number | string>(
 
 //map
 
-export const mapFn = <T>(
+export const mapFn = <T, U>(
   array: T[],
-  callback: (element: T, index: number, array: T[]) => T
-) => {
-  const copy = [...array];
-
-  return copy.reduce((accumulator: T[], currentValue, index, copy) => {
-    accumulator.push(callback(currentValue, index, copy));
-    return accumulator;
-  }, []);
-};
-
-//every
-
-export const everyFn = <T>(
-  array: T[],
-  callback: (currentValue: T, index: number, array: T[]) => boolean
-) => {
-  const copy = [...array];
-
-  return copy.reduce(
-    (accumulator, currentValue, index, copy) =>
-      accumulator && callback(currentValue, index, copy),
-    true
-  );
-};
-
-//some
-
-export const someFn = <T>(
-  array: T[],
-  callback: (currentValue: T, index: number, array: T[]) => boolean
+  callback: (element: T, index: number, array: T[]) => U
 ) => {
   const copy = [...array];
 
   return copy.reduce((accumulator, currentValue, index, copy) => {
-    if (callback(currentValue, index, copy)) return true;
+    accumulator.push(callback(currentValue, index, copy));
     return accumulator;
-  }, false);
+  }, [] as U[]);
 };
+
+//every
+
+type everyFnCallback<T> = (
+  currentElement: T,
+  index: number,
+  array: T[]
+) => boolean;
+
+export function everyFnR<T>(array: T[], callback: everyFnCallback<T>): boolean {
+  const result = [...array].reduce((accumulator, currElement, index, arr) => {
+    if (!callback(currElement, index, arr)) {
+      arr.splice(index);
+      return false;
+    }
+
+    return true;
+  }, false);
+
+  return result;
+}
+
+//some
+
+type someFnCallback<T> = (
+  currentElement: T,
+  index: number,
+  array: T[]
+) => boolean;
+
+export function someFnR<T>(array: T[], callback: someFnCallback<T>): boolean {
+  const result = [...array].reduce((accumulator, currElement, index, arr) => {
+    if (callback(currElement, index, arr)) {
+      arr.splice(index);
+      return true;
+    }
+
+    return false;
+  }, true);
+
+  return result;
+}
