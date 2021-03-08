@@ -1,5 +1,5 @@
 import task1 from "./task1";
-import { paginateArray } from "./task1/ts-fn/pagination";
+import { filterWith } from "./task1/ts-fn/filterWith";
 
 const data = [
   {
@@ -186,6 +186,6 @@ const dataPagination = "Lorem Ipsum has been the industrys standard dummy text e
 // const settings = { actualPageIdx: 1, entriesOnPage: 10 };
 const settings = { entriesOnPage: 5, paginateArrayIdx: 6 };
 
-const a = paginateArray(array, { actualPageIndex: 3, entriesOnPage: 5 });
+const a = filterWith(data, "Herminia Witt");
 console.log(a);
 // console.log(alphabet);

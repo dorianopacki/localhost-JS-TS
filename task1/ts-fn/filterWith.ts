@@ -1,23 +1,14 @@
 type avaiblePhase = string | number;
 
 export function filterWith<T>(arrOfSomething: T[], phrase: avaiblePhase): T[] {
-  if (typeof phrase === "number") {
-    if (phrase.toString().length < 2) {
-      return [];
-    }
-  } else {
-    if (phrase.length < 2) {
-      return [];
-    }
+  if (phrase.toString().length < 2) {
+    return [];
   }
-  const toSearch = new RegExp(phrase.toString().toLowerCase());
+
+  const toSearch = new RegExp(phrase.toString(), "gi");
 
   return arrOfSomething.filter((element) => {
-    if (typeof element === "string") {
-      return element.toLowerCase().match(toSearch);
-    }
-
-    if (typeof element === "number") {
+    if (typeof element === "string" || typeof element === "number") {
       return element.toString().match(toSearch);
     }
 
